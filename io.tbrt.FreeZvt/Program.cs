@@ -158,46 +158,85 @@ namespace IO.TBRT.FreeZVT
         
         public class Options
         {
+            [Option("Ausgabepfad")]
             public string? Ausgabepfad { get; set; } = null;
             [Option("COM", Required = true)]
             public string COM { get; set; }
+            [Option("ComSpeed")]
             public int ComSpeed { get; set; } = 9600;
+            [Option("ComStop")]
             public ComStopType ComStop { get; set; } = ComStopType.OneBit;
+            [Option("IP")]
             public string? IP { get; set; }
+            [Option("Port")]
             public int? Port { get; set; } = 22000;
+            [Option("PortKasse")]
             public int? PortKasse { get; set; } = 4102;
+            [Option("Type")]
             public DeviceType Typ { get; set; } = DeviceType.Allgemein;
+            [Option("Passwort")]
             public int? Passwort { get; set; } = 000000;
+            [Option("KasseNr")]
             public int? KasseNr { get; set; }
+            [Option("Protokollpfad")]
             public string? Protokollpfad { get; set; }
+            [Option("Funktion")]
             public FunctionType Funktion { get; set; } = FunctionType.Zahlung;
+            [Option("Betrag")]
             public int Betrag { get; set; }
+            [Option("Kassedruck")]
             public DruckType Kassedruck { get; set; } = DruckType.Terminal;
+            [Option("Test")]
             public TestType Test { get; set; } = TestType.NoTest;
+            [Option("Lizenz")]
             public string? Lizenz { get; set; }
+            [Option("Provider")]
             public string? Provider { get; set; }
+            [Option("Kartennummer")]
             public string? Kartennummer { get; set; }
+            [Option("Kartegueltig")]
             public string? Kartegueltig { get; set; }
+            [Option("KarteCVC")]
             public string? KarteCVC { get; set; }
+            [Option("PIN")]
             public PinType PIN { get; set; } = PinType.TerminalSettings;
+            [Option("Dialog")]
             public DialogType Dialog { get; set; } = DialogType.Standarddialog;
+            [Option("StornoBelegNr")]
             public string? StornoBelegNr { get; set; }
+            [Option("StornoBetrag")]
             public int? StornoBetrag { get; set; }
+            [Option("Abmelden")]
             public AbmeldenType Abmelden { get; set; } = AbmeldenType.Standard;
+            [Option("Original")]
             public int Original { get; set; } = 1;
+            [Option("Diag")]
             public DiagType Diag { get; set; } = DiagType.Netzwerkdiagnose;
+            [Option("Eingabedatei")]
             public string? Eingabedatei { get; set; }
+            [Option("ReservierungsBelegNr")]
             public string? ReservierungBelegNr { get; set; }
+            [Option("ReservierungrefNr")]
             public string? ReservierungRefNr { get; set; }
+            [Option("ReservierungAID")]
             public string? ReservierungAID { get; set; }
+            [Option("Sprache")]
             public SpracheCode Sprache { get; set; } = SpracheCode.DE;
+            [Option("Waerung")]
             public WaerungCode Waerung { get; set; } = WaerungCode.EUR;
+            [Option("TrinkgeldBelegNr")]
             public string? TrinkfgeldBelegNr { get; set; }
+            [Option("Alter")]
             public int Alter { get; set; } = 0;
+            [Option("Sperre")]
             public SperreType Sperre { get; set; } = SperreType.NichtGesperrt;
+            [Option("WWRef")]
             public string? WWRef { get; set; }
+            [Option("Warenautomat")]
             public WarenautomatType Warenautomat { get; set; } = WarenautomatType.KeinAutomatAngeschlossen;
+            [Option("Breite")]
             public int Breite { get; set; } = 24;
+            [Option("Verfahren")]
             public VerfahrenType Verfahren { get; set; } = VerfahrenType.StandardKartenzahlung;
         }
 
