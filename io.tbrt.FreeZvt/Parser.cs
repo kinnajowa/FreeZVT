@@ -32,7 +32,7 @@ public static class Parser
         throw new DataTypes.ParsingException();
     }
 
-    public static DataTypes.Options ParseRegistryArgs(string regDefaultKey)
+    public static DataTypes.Options ParseRegistryArgs(string? regDefaultKey)
     {
         if (string.IsNullOrEmpty(regDefaultKey))
             throw new DataTypes.ParsingException("Default regestry path cannot be empty.");
