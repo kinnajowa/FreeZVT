@@ -88,7 +88,7 @@ public static class Parser
         return options;
 #pragma warning restore CA1416
 #elif RELEASE_UNIX
-        throw new ParsingException("Registry is only available on a Windows platform.");
+        throw new DataTypes.ParsingException("Registry is only available on a Windows platform.");
 #endif
     }
 
