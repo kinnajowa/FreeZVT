@@ -34,6 +34,9 @@ public static class Parser
 
     public static DataTypes.Options ParseRegistryArgs(string regDefaultKey)
     {
+        if (string.IsNullOrEmpty(regDefaultKey))
+            throw new DataTypes.ParsingException("Default regestry path cannot be empty.");
+        
         _regDefaultKey = regDefaultKey;
         
 #if RELEASE_WIN

@@ -20,17 +20,7 @@ namespace IO.TBRT.FreeZVT
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                //Set current executable path in registry when running on windows
-#if RELEASE_WIN
-#pragma warning disable CA1416
-                Registry.SetValue(config["Registry:DefaultKey"] ?? string.Empty, "START",
-                    System.Reflection.Assembly.GetExecutingAssembly().Location);
-#pragma warning restore CA1416
-#endif
-
                 var regDefaultKey = config["Registry:DefaultKey"];
-                if (string.IsNullOrEmpty(regDefaultKey))
-                    throw new DataTypes.ParsingException("Default regex path cannot be empty.");
                 options = args.Any() ? Parser.ParseCommandLineArgs(args) : Parser.ParseRegistryArgs(regDefaultKey);
                 
                 if (!string.IsNullOrEmpty(options.Eingabedatei))
