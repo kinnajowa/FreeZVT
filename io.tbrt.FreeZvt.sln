@@ -6,11 +6,19 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Release WIN|Any CPU = Release WIN|Any CPU
+		Release Unix|Any CPU = Release Unix|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B25199DD-2946-4222-A0C6-E68454D498DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B25199DD-2946-4222-A0C6-E68454D498DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release WIN|Any CPU.ActiveCfg = Release WIN|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release WIN|Any CPU.Build.0 = Release WIN|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release Unix|Any CPU.ActiveCfg = Release Unix|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release Unix|Any CPU.Build.0 = Release Unix|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release Unix|Any CPU.Deploy.0 = Release Unix|Any CPU
+		{B25199DD-2946-4222-A0C6-E68454D498DB}.Release WIN|Any CPU.Deploy.0 = Release WIN|Any CPU
 	EndGlobalSection
 EndGlobal
