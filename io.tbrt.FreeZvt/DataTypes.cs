@@ -68,6 +68,35 @@ public class DataTypes
         }
     }
 
+    [Serializable]
+    public class ConnectionFailureException : Exception
+    {
+        //
+        // For guidelines regarding the creation of new exception types, see
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
+        // and
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
+        //
+
+        public ConnectionFailureException()
+        {
+        }
+
+        public ConnectionFailureException(string message) : base(message)
+        {
+        }
+
+        public ConnectionFailureException(string message, Exception inner) : base(message, inner)
+        {
+        }
+
+        protected ConnectionFailureException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context)
+        {
+        }
+    }
+
     public enum ComStopType
     {
         OneBit = 1,
@@ -228,7 +257,7 @@ public class DataTypes
         [Option("PortKasse")] public int PortKasse { get; set; } = 4102;
         [Option("Type")] public DeviceType Typ { get; set; } = DeviceType.Allgemein;
         [Option("Passwort")] public string Passwort { get; set; } = string.Empty;
-        [Option("KasseNr")] public int KasseNr { get; set; } = 1;
+        [Option("KasseNr")] public int KasseNr { get; set; } = 0;
 
         [Option("Protokollpfad")] public string Protokollpfad { get; set; } = Path.Combine(new[] { Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "GUB", "ZVTLOG"});
 
