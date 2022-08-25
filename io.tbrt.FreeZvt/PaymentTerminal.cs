@@ -59,7 +59,11 @@ public class PaymentTerminal
 
     public CommandResponse Payment(int amount)
     {
-        var task = _zvtClient.PaymentAsync(amount);
+        var str = amount.ToString();
+        var len = str.Length;
+        var formattedStr = $"{str.Substring(0, len - 2)},{str.Substring(len - 3, 2)}";
+        decimal formattedAmount = decimal.Parse(formattedStr);
+        var task = _zvtClient.PaymentAsync(formattedAmount);
         task.Wait();
         return task.Result;
     }

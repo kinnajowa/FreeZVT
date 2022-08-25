@@ -6,7 +6,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>ca.tbrt.io-netcore.snk</AssemblyOriginatorKeyFile>
         <Configurations>Debug;Release;Release WIN;Release Unix</Configurations>
         <Platforms>AnyCPU</Platforms>

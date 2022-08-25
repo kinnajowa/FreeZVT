@@ -138,6 +138,7 @@ namespace IO.TBRT.FreeZVT
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 //Todo: logging
 
                 _terminal.Dispose();
