@@ -1,16 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Portalum.Zvt;
 
-#if RELEASE_WIN
-using Microsoft.Win32;
-#endif
-
 namespace IO.TBRT.FreeZVT
 {
     class Program
     {
         private static DataTypes.Options _options = null!;
         private static PaymentTerminal _terminal = null!;
+        private static TransactionStatus _status = null!;
         public static void Main(string[] args)
         {
             try
@@ -36,6 +33,9 @@ namespace IO.TBRT.FreeZVT
                     if (string.IsNullOrEmpty(_options.IP) || _options.Port == 0)
                         throw new DataTypes.InvalidDataException("invalid ip address or port,");
                 }
+
+                _status = new TransactionStatus(regDefaultKey, _options);
+                _status.Update();
 
                 _terminal = new PaymentTerminal(_options);
                 _terminal.Registration();
