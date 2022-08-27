@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using CommandLine;
 
 namespace IO.TBRT.FreeZVT;
@@ -298,29 +299,56 @@ public class DataTypes
 
     public class Ausgabe
     {
-        public string? START { get; set; }
+        [XmlIgnore]
         public AktivType Aktiv { get; set; }
+        [XmlElement("Aktiv")]
+        public int AktivInt
+        {
+            get { return (int) Aktiv; }
+            set { Aktiv = (AktivType) value; }
+        }
         public int Ergebnis { get; set; }
-        public string? ErgebnisText { get; set; }
-        public string? ErgebnisLang { get; set; }
-        public string? Autorisierungsergebnis { get; set; }
-        public string? PAN { get; set; }
+        public string ErgebnisText { get; set; } = string.Empty;
+        public string ErgebnisLang { get; set; } = string.Empty;
+        public string Autorisierungsergebnis { get; set; } = string.Empty;
+        public string PAN { get; set; } = string.Empty;
         public int Betrag { get; set; }
         public int Kartentyp { get; set; }
-        public string? KartentypLang { get; set; }
-        public string? BLZ { get; set; }
-        public string? Kontonummer { get; set; }
-        public string? Drucktext { get; set; }
-        public string? Drucktext2 { get; set; }
-        public string? Haendlerbeleg { get; set; }
-        public string BelegNr { get; set; }
-        public ZahlType Zahlart { get; set; }
-        public AuthentifizierungType Authentifizierung { get; set; }
-        public string? TID { get; set; }
-        public string? Geraetetyp { get; set; }
-        public string? Softwareversion { get; set; }
-        public string RefNr { get; set; }
-        public string AID { get; set; }
-        public AltersverifikationType Altersverifikation { get; set; }
+        public string KartentypLang { get; set; } = string.Empty;
+        public string BLZ { get; set; } = string.Empty;
+        public string Kontonummer { get; set; } = string.Empty;
+        public string Drucktext { get; set; } = string.Empty;
+        public string Drucktext2 { get; set; } = string.Empty;
+        public string Haendlerbeleg { get; set; } = string.Empty;
+        public string BelegNr { get; set; } = string.Empty;
+        [XmlIgnore]
+        public ZahlType Zahlart { get; set; } = ZahlType.Online;
+        [XmlElement("Zahlart")]
+        public int ZahlartInt
+        {
+            get { return (int) Zahlart; }
+            set { Zahlart = (ZahlType) value; }
+        }
+        [XmlIgnore]
+        public AuthentifizierungType Authentifizierung { get; set; } = AuthentifizierungType.Online;
+        [XmlElement("Authentifizierung")]
+        public int AuthentifizierungInt
+        {
+            get { return (int) Authentifizierung; }
+            set { Authentifizierung = (AuthentifizierungType) value; }
+        }
+        public string TID { get; set; } = string.Empty;
+        public string Geraetetyp { get; set; } = string.Empty;
+        public string Softwareversion { get; set; } = string.Empty;
+        public string RefNr { get; set; } = string.Empty;
+        public string AID { get; set; } = string.Empty;
+        [XmlIgnore]
+        public AltersverifikationType Altersverifikation { get; set; } = AltersverifikationType.TerminalNichtGeeignet;
+        [XmlElement("Altersverifikation")]
+        public int AltersverifikationInt
+        {
+            get { return (int) Altersverifikation; }
+            set { Altersverifikation = (AltersverifikationType) value; }
+        }
     }
 }

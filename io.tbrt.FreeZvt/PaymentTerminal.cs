@@ -8,7 +8,6 @@ public class PaymentTerminal
     private readonly DataTypes.Options _options;
     private ZvtClientConfig _zvtClientConfig;
     private ZvtClient _zvtClient;
-    private ReceiveHandler _zvtReceiveHandler = new();
     public PaymentTerminal(DataTypes.Options options)
     {
         _options = options;
@@ -16,7 +15,7 @@ public class PaymentTerminal
         {
             Encoding = ZvtEncoding.CodePage437,
             Language = _options.Sprache == DataTypes.SpracheCode.DE ? Language.German : Language.English,
-            Password = int.Parse(_options.Passwort)
+            Password = int.Parse(string.IsNullOrEmpty(_options.Passwort) ? "0" : _options.Passwort)
         };
 
         IDeviceCommunication deviceCommunication = _options.COM.Equals("LAN")
