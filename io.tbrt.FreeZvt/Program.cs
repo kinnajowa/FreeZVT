@@ -35,9 +35,10 @@ namespace IO.TBRT.FreeZVT
                 }
 
                 _status = new TransactionStatus(regDefaultKey, _options);
+                _status.SetActive(true);
                 _status.Update();
 
-                _terminal = new PaymentTerminal(_options);
+                _terminal = new PaymentTerminal(_options, _status);
                 _terminal.Registration();
 
                 CommandResponse res;
@@ -97,51 +98,18 @@ namespace IO.TBRT.FreeZVT
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-
-                var ausgabe = new DataTypes.Ausgabe();
-
-                switch (res.State)
-                {
-                    case CommandResponseState.Unknown:
-                        ausgabe.Ergebnis = 1;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.ErgebnisText = res.ErrorMessage;
-                        break;
-                    case CommandResponseState.Successful:
-                        ausgabe.Ergebnis = 0;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.Autorisierungsergebnis = res.ErrorMessage;
-                        break;
-                    case CommandResponseState.Abort:
-                        ausgabe.Ergebnis = 1;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.ErgebnisText = res.ErrorMessage;
-                        break;
-                    case CommandResponseState.Timeout:
-                        ausgabe.Ergebnis = 1;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.ErgebnisText = res.ErrorMessage;
-                        break;
-                    case CommandResponseState.NotSupported:
-                        ausgabe.Ergebnis = 1;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.ErgebnisText = res.ErrorMessage;
-                        break;
-                    case CommandResponseState.Error:
-                        ausgabe.Ergebnis = 1;
-                        ausgabe.Aktiv = 0;
-                        ausgabe.ErgebnisText = res.ErrorMessage;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                
+                _status.SetActive(false);
+                _status.Update();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 //Todo: logging
 
-                _terminal.Dispose();
+                if (_terminal != null) _terminal.Dispose();
+                _status.SetActive(false);
+                _status.Update();
                 Environment.Exit(-1);
             }
         }

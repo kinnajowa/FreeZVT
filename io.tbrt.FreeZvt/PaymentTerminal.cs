@@ -1,5 +1,6 @@
 ﻿using System.IO.Ports;
 using Portalum.Zvt;
+using Portalum.Zvt.Models;
 
 namespace IO.TBRT.FreeZVT;
 
@@ -8,9 +9,11 @@ public class PaymentTerminal
     private readonly DataTypes.Options _options;
     private ZvtClientConfig _zvtClientConfig;
     private ZvtClient _zvtClient;
-    public PaymentTerminal(DataTypes.Options options)
+    private TransactionStatus _status;
+    public PaymentTerminal(DataTypes.Options options, TransactionStatus status)
     {
         _options = options;
+        _status = status;
         _zvtClientConfig = new ZvtClientConfig
         {
             Encoding = ZvtEncoding.CodePage437,
@@ -22,12 +25,15 @@ public class PaymentTerminal
             ? new TcpNetworkDeviceCommunication(_options.IP, _options.Port)
             : new SerialPortDeviceCommunication(_options.COM, _options.ComSpeed,
                 stopBits: _options.ComStop == DataTypes.ComStopType.OneBit ? StopBits.One : StopBits.Two);
-
+        
         var conn = deviceCommunication.ConnectAsync();
         conn.Wait();
         if (!conn.Result) throw new DataTypes.ConnectionFailureException($"Cannot connect to payment terminal over {_options.COM}");
         
         _zvtClient = new ZvtClient(deviceCommunication, clientConfig: _zvtClientConfig);
+        _zvtClient.ReceiptReceived += _status.ReceiptReceived;
+        _zvtClient.IntermediateStatusInformationReceived += _status.IntermediateInformationReceived;
+        _zvtClient.StatusInformationReceived += _status.StatusInformationReceived;
     }
 
     public CommandResponse Registration()
@@ -125,6 +131,6 @@ public class PaymentTerminal
 
     public void Dispose()
     {
-        _zvtClient.Dispose();
+        if (_zvtClient != null) _zvtClient.Dispose();
     }
 }

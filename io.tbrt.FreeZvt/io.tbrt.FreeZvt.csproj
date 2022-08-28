@@ -37,4 +37,8 @@
       <PackageReference Include="Portalum.Zvt" Version="2.16.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Logger" />
+    </ItemGroup>
+
 </Project>
