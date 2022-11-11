@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Portalum.Zvt;
+using Portalum.Zvt.Models;
 
 namespace IO.TBRT.FreeZVT
 {
@@ -99,8 +100,19 @@ namespace IO.TBRT.FreeZVT
                         throw new ArgumentOutOfRangeException();
                 }
                 
+                switch (res.State)
+                {
+                    case CommandResponseState.Successful:
+                        Environment.ExitCode = 0;
+                        break;
+                    default:
+                        Environment.ExitCode = 1;
+                        break;
+                }
+                
                 _status.SetActive(false);
                 _status.Update();
+                return;
             }
             catch (Exception e)
             {
@@ -110,7 +122,7 @@ namespace IO.TBRT.FreeZVT
                 if (_terminal != null) _terminal.Dispose();
                 _status.SetActive(false);
                 _status.Update();
-                Environment.Exit(-1);
+                Environment.Exit(1);
             }
         }
     }
